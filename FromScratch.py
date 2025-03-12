@@ -16,12 +16,10 @@ class Perceptron(object):
     
     def stepFunction(self, X):
         return np.where(self.weighted_sum(X) >= 0.0, 1, -1)
-    def initialWeight(num_w):
-        return
-    
+
     def fit(self, X, y):
         # Initialize the weights randomly between -0.5 and 0.5
-        self.w_ = np.random.uniform(-0.5, 0.5, 1 + X.shape[1])
+        self.weight = np.random.uniform(-0.5, 0.5, 1 + X.shape[1])
         self.errors_ = []
         print("Weights:", self.weight)
 

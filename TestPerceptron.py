@@ -1,7 +1,7 @@
 import csv
 from FromScratch import Perceptron as p
 
-# 1. Read CSV file and store data
+# Read CSV file and store data
 data = []
 with open('WeatherData_Q3.csv', 'r') as f:
     reader = csv.reader(f)
@@ -17,7 +17,7 @@ with open('WeatherData_Q3.csv', 'r') as f:
             # skip any rows that fail parsing
             continue
 
-# 2. Separate features (X) and labels (y)
+# Separate features (X) and labels (y)
 X = []
 y = []
 for (temp, humid, rain_val) in data:
@@ -28,7 +28,7 @@ for (temp, humid, rain_val) in data:
     else:
         y.append(-1)
 
-# 3. Split into training (first 15) and testing (last 5)
+# Split into training (first 15) and testing (last 5)
 train_data = X[:15]
 train_labels = y[:15]
 test_data = X[15:]
@@ -44,3 +44,22 @@ test_labels = y[15:]
 # for label in train_labels:
 #     print(label)
 
+perceptron = p(l_rate=0.1, n_iter=1000)
+perceptron.fit(train_data, train_labels)
+
+test_preds = perceptron.predict(test_data)
+print(test_preds)
+
+# Assuming y_preds and test_labels are lists of predicted and true labels
+
+# Count the number of correct predictions
+correct = 0
+for pred, true in zip(test_preds, test_labels):
+    if pred == true:
+        correct += 1
+
+# Compute accuracy as a fraction of correct predictions
+accuracy = correct / len(test_labels)
+
+# Print the accuracy as a percentage rounded to two decimal places
+print("Accuracy:", round(accuracy * 100, 2), "%")
