@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Read the CSV file
-df = pd.read_csv('/mnt/data/WeatherData_Q3.csv')
+df = pd.read_csv('WeatherData_Q3.csv')
 
 # Separate data based on the rain condition
 no_rain = df[df['y'] == 0]
