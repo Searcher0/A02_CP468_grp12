@@ -47,7 +47,7 @@ test_labels = y[15:]
 perceptron = p(l_rate=0.1, n_iter=1000)
 perceptron.fit(train_data, train_labels)
 
-test_preds = perceptron.predict(test_data)
+test_preds = perceptron.stepFunction(test_data)
 print(test_preds)
 
 # Assuming y_preds and test_labels are lists of predicted and true labels

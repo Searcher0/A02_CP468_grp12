@@ -15,9 +15,12 @@ class Perceptron(object):
         return np.dot(X, self.weight[1:]) + self.weight[0]
     
     def stepFunction(self, X):
-        return np.where(self.weighted_sum(X) >= 0.0, 1, -1)
+        return np.where(self.weightedSum(X) >= 0.0, 1, -1)
 
     def fit(self, X, y):
+        # Convert X and y to NumPy arrays so we can use shape attributes
+        X = np.array(X)
+        y = np.array(y)
         # Initialize the weights randomly between -0.5 and 0.5
         self.weight = np.random.uniform(-0.5, 0.5, 1 + X.shape[1])
         self.errors_ = []
@@ -28,14 +31,14 @@ class Perceptron(object):
             error = 0
 
             # loop through each input
-            for xi, y in zip(X, y):
+            for xi, target in zip(X, y):
 
                 # 1. calculate ŷ (the predicted value)
-                y_pred = self.predict(xi)
+                y_pred = self.stepFunction(xi)
 
                 # 2. calculate Update
                 # update = η * (y - ŷ)
-                update = self.eta * (y - y_pred)
+                update = self.l_rate * (target - y_pred)
 
                 # 3. Update the weights
                 # Wi = Wi + Δ(Wi)   where  Δ(Wi) = η * (y - ŷ) = update * Xi
