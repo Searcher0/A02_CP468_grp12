@@ -9,7 +9,7 @@ class Perceptron(object):
     def __init__(self, l_rate=0.1, n_iter=1000):
         self.l_rate = l_rate
         self.n_iter = n_iter
-        #bias (Xo = 1)
+        
 
     """Following the formula, Using numpy to calculate the dot product of the Input & weight vectors"""
     def weightedSum(self, X):
@@ -45,7 +45,7 @@ class Perceptron(object):
                 self.weight[1:] = self.weight[1:] + update * xi
                 print("Updated Weights:", self.weight[1:])
 
-                # Bias
+                # Bias Xo = 1
                 self.weight[0] = self.weight[0] + update
                 error += int(update != 0.0)
             self.errors_.append(error)
