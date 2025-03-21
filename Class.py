@@ -9,10 +9,12 @@ class Perceptron(object):
     def __init__(self, l_rate=0.1, n_iter=1000):
         self.l_rate = l_rate
         self.n_iter = n_iter
+        #bias (Xo = 1)
 
     """Following the formula, Using numpy to calculate the dot product of the Input & weight vectors"""
     def weightedSum(self, X):
         return np.dot(X, self.weight[1:]) + self.weight[0]
+        
     
     def stepFunction(self, X):
         return np.where(self.weightedSum(X) >= 0.0, 1, -1)
@@ -26,31 +28,25 @@ class Perceptron(object):
         self.errors_ = []
         print("Weights:", self.weight)
 
-        # training the model n_iter times
+        # Training the model
         for _ in range(self.n_iter):
             error = 0
 
-            # loop through each input
+            # loop through all inputs
             for xi, target in zip(X, y):
 
-                # 1. calculate ŷ (the predicted value)
+                # Calculate predicted value
                 y_pred = self.stepFunction(xi)
 
-                # 2. calculate Update
-                # update = η * (y - ŷ)
+                # η * (y - ŷ)
                 update = self.l_rate * (target - y_pred)
 
-                # 3. Update the weights
-                # Wi = Wi + Δ(Wi)   where  Δ(Wi) = η * (y - ŷ) = update * Xi
+                # Update the weights
                 self.weight[1:] = self.weight[1:] + update * xi
                 print("Updated Weights:", self.weight[1:])
 
-                # Update the bias (Xo = 1)
+                # Bias
                 self.weight[0] = self.weight[0] + update
-
-                # if update != 0, it means that ŷ != y
                 error += int(update != 0.0)
-
             self.errors_.append(error)
-
         return self

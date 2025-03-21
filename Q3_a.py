@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 # Read the CSV file
 df = pd.read_csv('WeatherData_Q3.csv')
 
-# Separate data based on the "rain" column
+# Separate data
 no_rain = df[df['rain'] == 0]
 rain = df[df['rain'] == 1]
 
@@ -15,7 +15,7 @@ plt.scatter(rain['temp'], rain['humid'],
 plt.scatter(no_rain['temp'], no_rain['humid'],
             color='blue', marker='s', s=100, label='No Rain')
 
-# Add labels, title, and legend
+# Labels, title, and legend
 plt.xlabel('Temperature')
 plt.ylabel('Humidity')
 plt.title('Rain Data')
